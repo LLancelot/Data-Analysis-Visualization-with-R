@@ -1,0 +1,47 @@
+setwd("C:\\Users\\Lin\\Desktop\\2019 Fall\\555 DAV_ R\\R_Script")
+getwd()
+
+# read data from "hospital_days.csv" file
+dataDay <- read.csv("hospital_days.csv")
+dataDay
+
+# draw histogram of days
+par(mfrow=c(1,1))
+hist(dataDay$day, 
+     main="Histogram of The Duration of Days of Hospital",
+     xlab = "Days",
+     xlim = c(0,max(dataDay$day)),
+     breaks = 15,
+     col = "red")
+
+# load package 'ggplot2' 
+library(ggplot2)
+
+# draw histogram of days
+qplot(dataDay$day)
+ggplot(dataDay, aes(x=day))+
+geom_histogram(binwidth=1, 
+               fill = "#CCCCCC", color = "black")+
+  ggtitle("Histogram of The Duration of Days of Hospital")
+
+# draw boxplot
+boxplot(dataDay$day)
+
+# calculate mean,median,standard deviation
+# and 1st & 3rd quantile, min and max
+mean(dataDay$day)
+median(dataDay$day)
+sd(dataDay$day)
+quantile(dataDay$day,0.25)
+quantile(dataDay$day,0.75)
+min(dataDay$day)
+max(dataDay$day)
+
+# percentage less than 7 days
+pnorm(7, mean = 5, sd = 3)
+
+# use CLT to get new standard deviation of sample
+3/sqrt(10)
+
+# percentage greater than 7 days for sample mean
+1-pnorm(7,mean = 5, sd=0.9486833)
