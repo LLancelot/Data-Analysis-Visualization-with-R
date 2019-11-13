@@ -1,0 +1,37 @@
+setwd("C:\\Users\\Lin\\Desktop\\2019 Fall\\555 DAV_ R\\R_Script")
+getwd()
+
+# (1) read data from "calorie.csv" file
+data2 = read.csv("calorie.csv")
+data2
+
+# separate the participants and non-participants respectively
+part = data2$calorie[data2$group==1]
+nonpart = data2$calorie[data2$group==2]
+
+# summary two groups
+summary(part)
+summary(nonpart)
+
+# load ggplot2 to draw histograms
+library(ggplot2)
+
+ggplot()+aes(x=part)+geom_histogram(binwidth=35,colour="black",fill="white")+
+  ggtitle("Histogram of Calorie Intake for Participants")+xlab("Calorie(kcal)")
+
+ggplot()+aes(x=nonpart)+geom_histogram(binwidth=35,colour="black",fill="white")+
+  ggtitle("Histogram of Calorie Intake for Non-participants")+xlab("Calorie(kcal)")
+
+# draw boxplot side by side
+boxplot(data2$calorie~data2$group)
+
+# (2) use t-test
+t.test(part, mu=425,  alternative="two.sided")
+
+# (3) use t-test calculate 90% conf.interval
+t.test(part, alternative="two.sided" ,conf.level=0.90)
+
+# (4) two sample t-test
+t.test(part, nonpart, alternative = "greater")
+
+
